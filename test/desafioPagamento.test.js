@@ -1,29 +1,32 @@
 import assert from 'node:assert';
+import test from 'node:test';
 import ServicoDePagamento from '../src/desafioPagamento.js';
 
-describe('Testes do ServicoDePagamento', () => {
-  let servico;
+test('ServicoDePagamento - classificar pagamento caro', () => {
+  const servico = new ServicoDePagamento();
 
-  beforeEach(() => {
-    servico = new ServicoDePagamento();
-  });
+  servico.pagar('123', 'Empresa A', 150.00);
+  const ultimo = servico.consultarUltimoPagamento();
 
-  it('Deve classificar como "cara" um pagamento acima de 100.00', () => {
-    servico.pagar('123', 'Empresa A', 150.00);
-    const ultimo = servico.consultarUltimoPagamento();
-    assert.strictEqual(ultimo.categoria, 'cara');
-  });
+  assert.strictEqual(ultimo.categoria, 'cara');
+});
 
-  it('Deve classificar como "padrão" um pagamento de 100.00 ou menos', () => {
-    servico.pagar('456', 'Empresa B', 50.00);
-    const ultimo = servico.consultarUltimoPagamento();
-    assert.strictEqual(ultimo.categoria, 'padrão');
-  });
+test('ServicoDePagamento - classificar pagamento padrão', () => {
+  const servico = new ServicoDePagamento();
 
-  it('Deve retornar exatamente o último pagamento realizado', () => {
-    servico.pagar('111', 'Loja 1', 10.00);
-    servico.pagar('222', 'Loja 2', 200.00);
-    const ultimo = servico.consultarUltimoPagamento();
-    assert.strictEqual(ultimo.codigoBarras, '222');
-  });
+  servico.pagar('456', 'Empresa B', 50.00);
+  const ultimo = servico.consultarUltimoPagamento();
+
+  assert.strictEqual(ultimo.categoria, 'padrão');
+});
+
+test('ServicoDePagamento - retorna último pagamento', () => {
+  const servico = new ServicoDePagamento();
+
+  servico.pagar('111', 'Loja 1', 10.00);
+  servico.pagar('222', 'Loja 2', 200.00);
+
+  const ultimo = servico.consultarUltimoPagamento();
+
+  assert.strictEqual(ultimo.codigoBarras, '222');
 });
