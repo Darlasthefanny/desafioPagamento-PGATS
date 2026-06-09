@@ -4,8 +4,7 @@
   "description": "",
   "main": "src/desafioPagamento.js",
   "scripts": {
-    "test": "mocha test/**/*.js --reporter mocha-junit-reporter --reporter-options mochaFile=reports/test-results.xml",
-    "lint": "eslint ."
+    "test": "mocha test/**/*.js --reporter mocha-junit-reporter --reporter-options mochaFile=reports/test-results.xml"
   },
   "repository": {
     "type": "git",
