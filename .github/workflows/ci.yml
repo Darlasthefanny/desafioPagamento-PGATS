@@ -35,7 +35,12 @@ jobs:
         run: mkdir -p reports
 
       - name: Rodar testes
-        run: npm test
+        run: |
+          mkdir -p reports
+          npm test
+
+      - name: Verificar arquivos gerados
+        run: ls -R reports
 
       - name: Upload relatório de testes
         uses: actions/upload-artifact@v4
