@@ -17,17 +17,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
 
-      - run: npm ci
-      - run: npm run lint
-      - run: npm test
+      - name: Instalar dependências
+        run: npm ci
 
-      - uses: actions/upload-artifact@v4
+      - name: Rodar ESLint
+        run: npm run lint
+
+      - name: Criar pasta de relatórios
+        run: mkdir -p reports
+
+      - name: Rodar testes
+        run: npm test
+
+      - name: Upload relatório de testes
+        uses: actions/upload-artifact@v4
         with:
           name: relatorio-testes
           path: reports/
