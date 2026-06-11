@@ -34,6 +34,9 @@ jobs:
       - name: Criar pasta de relatórios
         run: mkdir -p reports
 
+      - name: Mostrar package.json
+        run: cat package.json
+
       - name: Rodar testes
         run: |
           mkdir -p reports
