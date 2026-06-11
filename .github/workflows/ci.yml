@@ -34,18 +34,8 @@ jobs:
       - name: Criar pasta de relatórios
         run: mkdir -p reports
 
-      - name: Mostrar package.json
-        run: cat package.json
-
       - name: Rodar testes
-        run: |
-          mkdir -p reports
-          npm test
-
-      - name: Mostrar estrutura do projeto
-        run: |
-          pwd
-          ls -R
+        run: npm test
 
       - name: Upload relatório de testes
         uses: actions/upload-artifact@v4
